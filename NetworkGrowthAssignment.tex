@@ -1,0 +1,137 @@
+\documentclass[12pt]{article}
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage [round]{natbib}
+\usepackage{graphicx}% Include figure files
+\usepackage{hyperref}
+\usepackage{multirow}
+\newcommand{\keyword}[1]{\emph{\slshape #1}\index{#1}}
+\bibliographystyle{apalike}
+\usepackage{palatino}
+\usepackage{rotating}
+\usepackage{subfig}
+\usepackage{lineno}
+ \topmargin -1.5cm        % read Lamport p.163
+ \oddsidemargin -0.04cm   % read Lamport p.163
+ \evensidemargin -0.04cm  % same as oddsidemargin but for left-hand pages
+ \textwidth 16.5cm
+ \textheight 21.94cm 
+\usepackage{color}
+\usepackage {hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keywords}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links
+    citecolor=blue,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+\usepackage{amsmath}
+
+\begin{document}
+
+\title{Assignment: An Agent-based Network Growth Model \footnote{Contact Arthur Huang at huang284@umn.edu for questions.}}
+\maketitle
+
+The agent-based module for this assignment can be accessed at \url{http://street.umn.edu/NetworkGrowth.html}. Scroll down for a brief description of the model on the webpage. Details about the model can be found in \citep{Huang2011net, skyway}. 
+
+The goals of this assignment are:
+\begin{itemize}
+\item understanding how different incentives and disincentives influence the growth of network structure;
+\item learning about the patterns of road network growth;
+\item understanding how individual network builders' behavior shape the road/skyway network.
+\end{itemize}
+
+\section{Task 1: understand the model}
+
+
+\subsection{The Grid-like City Scenario} 
+Run the following scenario:
+\begin{enumerate}
+\item Select the ``Single-center grid-like city" scenario.
+\item Set $\delta$ as 0.68, rounds as 30.
+\item Set $Grid size$ as 7, $scale$ as 4.0, $newedgecost$ as 541, $w_{center}$ as 2900, and $w$ as 700. 
+\item Click ``Go''.
+\end{enumerate}
+
+Save the output network and the graphs of network topological measures. Click "Setup" and run the scenario at least 5 times. What network patterns have emerged? What features do you have? Do you obtain different network topologies? 
+\subsection{The Minneapolis Skyways Scenario}
+Run the following scenario:
+
+\begin{enumerate}
+\item Select the ``Minneapolis Skyways" scenario.
+\item Turn on ``show-downtown-streets''.
+\item Turn on ``show-actual-skyways".
+\item Set $\delta$ as 0.68, $unitedgecost$ as 320, and $unitbenefit$ as 1.4.
+\item Set $rounds$ as 45.
+\item Click ``Go''.
+\end{enumerate}
+
+Save the output network and the graphs of network topological measures. Click "Setup" and run the scenario at least 5 times. What network patterns have emerged? How close they are to the actual skyway network? What kind of evolutionary patterns do you observe?
+
+
+
+\section{Task 2: understand how different parameters influence network topology}
+
+Select the ``Single-center grid-like city'' scenario. Set $\delta$ values and $newedgecost$ as the values in Table 1 while keeping other parameters the same as Task 1. Run each arrangement and save the emerged network and the plots of the topological features.
+
+\begin{table}
+\end{table}
+
+Discuss the following questions:
+\begin{itemize}
+\item What happens to the network topology when $\delta$ is the greatest and $newedgecost$ is the smallest?
+\item What happens to the network topology when $\delta$ is the smallest and $newedgecost$ is the greatest?
+\end{itemize} 
+
+Select the ``Four-center grid-like city'' scenario. Set $\delta$ values and $newedgecost$ as the values in Table 1 while keeping other parameters the same as Task 1. Run each arrangement and save the emerged network and the plots of the topological features.
+
+\begin{table}
+\centering
+\caption{Different parameters in the grid-like city scenario}
+
+\begin{tabular}{ c  c   c  c c  c}
+\hline \hline
+& &\multicolumn{4}{c}{$\delta$} \\
+\hline
+& 0.05  & 0.55 & 1.0 & 1.50 & 2 \\
+ \multirow{2}{*} {$newedgecost$}  & 50 & & & & \\  
+&  100 & & & & \\ 
+& 150 & & & & \\ 
+&  200 & & & & \\ 
+\hline
+
+\end{tabular}
+\end{table}
+
+Discuss the following questions:
+\begin{itemize}
+\item What happens to the network topology when $\delta$ is the greatest and $newedgecost$ is the smallest?
+\item What happens to the network topology when $\delta$ is the smallest and $newedgecost$ is the greatest?
+\item Given the same set of parameters, how is the network in the single-center scenario different from the one in the four-center scenario? Use examples to illustrate the differences. 
+\end{itemize} 
+
+\section{Task 3: Submit a memo reporting to findings}
+The recommended outline is as follows:
+\begin{itemize}
+\item Problem statement 
+\item Methodology: describe the models and your approach in Task 1 and Task 2. Refer to \citet{Huang2011net, skyway} for details about the models.
+\item Results and analysis: report findings from Task 1 and Task 2.
+\item Conclusions and limitations. 
+\end{itemize}
+
+\bibliography{bib}
+
+\end{document}

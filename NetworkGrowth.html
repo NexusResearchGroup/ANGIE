@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>NetworkGrowth</title>
+<style type="text/css">
+<!--
+  :link { color: rgb(110, 0, 110); } 
+  :visited { color: rgb(110, 0, 110); } 
+  body { margin-left: 5px; font-family: arial, sans-serif; 
+         background: white; font-size: 12pt } 
+  h2 { background: rgb(166,172,255); 
+       font-size: 15pt; 
+       padding-left: 6px; padding-right: 6px; padding-top: 6px; 
+       padding-bottom: 6px; } 
+  p { margin-left: 10px; } 
+  pre { margin-left: 13px; background: rgb(225,225,225); 
+        font-family: monospace; padding-left: 3px; padding-right: 3px; 
+        padding-top: 3px; padding-bottom: 3px; } 
+-->
+</style>
+</head>
+<body>
+
+<p>An Agent-based Network Growth Model</p>
+<p>Developed by the Nexus Reserach Group at the University of Minnesota</p>
+
+<p>
+<applet code="org.nlogo.lite.Applet"
+        archive="NetLogoLite.jar,gis/gis.jar,gis/jai_codec-1.1.3.jar,gis/jai_core-1.1.3.jar,gis/jscience-4.2.jar,gis/jts-1.9.jar,gis/commons-codec-1.3.jar,gis/commons-logging-1.1.jar,gis/commons-httpclient-3.0.1.jar"
+        width="1755" height="758">
+  <param name="DefaultModel"
+         value="NetworkGrowth.nlogo">
+</applet>
+</p>
+
+<p>powered by
+<a target="_blank" href="http://ccl.northwestern.edu/netlogo/">NetLogo</a></p>
+
+<p>view/download model file:
+<a href="NetworkGrowth.nlogo">NetworkGrowth.nlogo</a>
+</p>
+<h2>WHAT IS IT?</h2>
+<p>This Network Growth Java Applet models the growth of road networks in several scenarios such as road networks in an artificial grid-like city and the Minneapolis Downtown Skyway network. The philosophy inherent in these models is that accessibility affects network growth and vice versa. The examples aim to illustrate that different values of accessibility at individual locations can lead to different network topologies. </p><br>
+<h2>HOW IT WORKS</h2>
+<p>A key assumption in these models is that the network is built from bottom to up, driven by individual investors' intention to maximize their benefits. The models in the five scenarios have the same mechanism. </p>
+<p>In the Minneapolis Skyways scenario, the edges of the network are called segments, and the vertices are buildings. The edges of the network are skyway segments, and the vertices are buildings. The value of accessibility for building owner i to build a new segment k in round t equals:</p>
+<p>A_i(k,t)= \sum_{j=1}^J  unitbenefit * beta_{j,t} *d_{ij,t}^{- delta}</p>
+<p>Where d_{ij,t} is the shortest network distance between vertices i and j. delta is a distance decay parameter, indicating that a longer travel path lowers the value of accessibility. $unitbenefit$ is the value of accessing one employee. beta_{j, t} represents the total number of employees in building $j$ in iteration t, which is assumed to be proportional to the area of office space in building j. Since the employees' data are not available for verification, this assumption is only approximately true, but it serves as a plausible start. In addition, since the office space of a building in reality evolved over time, in simulation each iteration's beta_{j, t} is updated using the office space data for building j in a corresponding year. The office space data after year 2002 (the 40th round) is the same as those in 2002. </p>
+<p>For building owner i, the incentive to build segment k is measured as the increased value of accessibility due to this new segment. The disincentive is the cost of building and maintaining segment k which is presumably proportional to its length. The marginal benefit for building owner $i$ to build segment k is the difference between the incentive and disincentive, which can be described as:</p>
+<p>Delta p_i (k, t) = A_i (k, t) - A_i (k, t-1) - unitedgecost * l_k</p>
+<p>Where l_k is the length of segment k and c is the unit cost of segment k. Among all possible segments to be built, building owner i selects the segment that provides the highest marginal benefit. If the highest marginal benefit is greater than zero, a segment will be built; otherwise no segment will be built. This is thus a locally selfish, myopic optimization, maximizing short-term benefit for the building owner himself. In deciding the segment candidates for each building owner, we rule out the segments which cannot be built because of specific uses of certain buildings (e.g., government administrative building). </p>
+<p>By setting different values of the parameters of the network, the users can test how different values of parameters affect the network structure. </p>
+<p>*****************************************************</p>
+<p>In the Grid-like City scenario, the mechanism of network is similar as the Minneapolis Skyways scenario. Location parcel owners compete to build roads (links) to connect other locations to capture the value of connection. The value of accessibility for building owner i to build a new link k in round t equals:</p>
+<p>A_i(k,t)= \sum_{j=1}^J  {w, w_center} *d_{ij,t}^{- delta}</p>
+<p>Where w is the value of an ordinary location accessed by i, and w_center is the value of a central location (typically higher than an ordinary location) accessed by i from the existing network. The marginal benefit for location owner i to build link k is the difference between the incentive and disincentive, which can be described as:</p>
+<p>Delta p_i (k, t) = A_i (k, t) - A_i (k, t-1) - newedgecost</p>
+<p>Where newedgecost is the cost of a new link which is fixed for all owners. By setting different parameter values, the users can test how the road network evolves from the game process. </p><br>
+<h2>HOW TO USE IT</h2>
+<p>1. Set up scenarios. Five scenarios can be selected: Minneapolis Skyway, single-center grid-like city, two-center grid-like city, four-center grid-like city, and nine-center grid-like city. </p>
+<p>2. Set the parameters and the number of rounds for the selected scenario. </p>
+<p>3. If you want to see what you have just set up, click &quot;Setup&quot;; otherwise, you just may click &quot;Go&quot; to run the program. </p><br>
+<h2>NOTATIONS IN THE APPLET</h2>
+<p>The Minneapolis Skyway Model:</p>
+<p>1. delta: distance decay parameter (negative)</p>
+<p>2. rounds: total number of iterations (each iteration stands for a year, starting from 1962. Offic space for each building is updated every year. After 2002 (40th round), the space data are the same as year 2002.</p>
+<p>3. show_downtown_streets: if turned on, a map of streets in Minneapolis downtown (from Mapquest.com) will be shown. Note that the effect will only become visible afer clicking &quot;Setup&quot; or &quot;Go&quot;.</p>
+<p>4. show_actual_skyways: if turned on, the actual skyway network (for comparison) will be shown. Note that the effect will only become visible after clicking &quot;Setup&quot; or &quot;Go&quot;.</p>
+<p>5. unitedgecost: cost per unit length (meter) of a skyway link</p>
+<p>6. unitbenefit: the value of accessing an employee in a building     </p>
+<p>*****************************************************</p>
+<p>The Grid-like City Model:</p>
+<p>1. delta: distance decay parameter (negative)</p>
+<p>2. rounds: total number of iterations</p>
+<p>3. Grid-size: number of equidistant locations in a row/column. The grid size parameter is only an odd number to make the numbers of locations on both sides of the center are the same. </p>
+<p>4. Scale: distance between two adjacent locations</p>
+<p>7. newedgecost: the cost of building a new link between two adjacent locations</p>
+<p>8. w_center: the value of the central location(s) (in red color)</p>
+<p>9. w: the value of an ordinary location </p><br>
+<h2>THINGS TO TRY</h2>
+<p>In the Minneapolis Skys scenario, try the following parameters:<br>delta = 0.68, rounds = 45, unitedgecost = 320, unitbenefit = 1.4</p>
+<p>Turn on show_downtown_streets and show_actual_street to compare the generated network with the actual skyway network. </p><br>
+<h2>CREDITS AND REFERENCES</h2>
+<p>The details about the models can be found in the following two papers:</p>
+<p>Levinson D. and Huang A. (2012) &quot;A positive theory of network connectivity&quot;. Environment and Planning B: Planning and Design 39(2) 308 – 325 URL: <a href="http://nexus.umn.edu/Papers/TheoryOfConnectivity.pdf">http://nexus.umn.edu/Papers/TheoryOfConnectivity.pdf</a></p>
+<p>Huang, A. and Levinson, D. (2012)  &quot;The structure and dynamics of a skyway network&quot;. The European Physical Journal: Special issue (in press).</p><br>
+
+  
+   
+  
+
+</font><font color="#007f69">end</font><font color="#000000">
+</font>
+</pre>
+
+</body>
+</html>
